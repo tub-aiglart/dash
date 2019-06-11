@@ -34,7 +34,7 @@ export default {
       const button = document.getElementById('save')
 
       const result = await this.$axios.$request({
-        baseURL: process.env.BASE_URL,
+        baseURL: 'https://api.tub-aiglart.com',
         url: `/exhibition`,
         method: 'post',
         headers: {

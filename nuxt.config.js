@@ -31,7 +31,7 @@ export default {
 
   env: {
     CDN_PATH: process.env.CDN_PATH,
-    BASE_URL: process.env.BASE_URL
+    BASE_URL: 'https://api.tub-aiglart.com'
   },
 
   build: {

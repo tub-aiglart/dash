@@ -40,7 +40,7 @@ export default {
       formData.append('displayed', displayed)
 
       const result = await this.$axios.$request({
-        baseURL: process.env.BASE_URL,
+        baseURL: 'https://api.tub-aiglart.com',
         url: `/image`,
         method: 'post',
         headers: {
