@@ -34,7 +34,7 @@ export default {
     const result = await $axios.$get('https://api.tub-aiglart.com' + '/image/' + route.params.id)
     return {
       image: result,
-      path: 'https://cdn.tub-aiglart.com' + 'images/'
+      path: 'https://cdn.tub-aiglart.com' + '/images/'
     }
   },
   methods: {
