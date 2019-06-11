@@ -79,7 +79,7 @@ export default {
       this.$axios.setHeader('Content-Type', 'application/json')
       this.$axios.setHeader('Authorization', 'Basic ' + btoa(`${username}:${password}`))
 
-      const result = await this.$axios.$get('https://api.tub-aiglart.com' + '/authorize', {
+      const result = await this.$axios.$get('https://api.tub-aiglart.com' + '/authorize', { // change back
         validateStatus: function (status) {
           return status < 500
         }
