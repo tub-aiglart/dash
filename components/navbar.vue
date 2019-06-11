@@ -7,8 +7,8 @@
       <nuxt-link class="link" to="/images">
         Images
       </nuxt-link>
-      <nuxt-link class="link" to="/images/upload">
-        Upload
+      <nuxt-link class="link" to="/exhibitions">
+        Exhibitions
       </nuxt-link>
     </div>
   </div>
@@ -36,6 +36,19 @@
 
       &:hover {
         background: var(--dark);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .nav {
+    height: 50px;
+
+    .links {
+
+      .link {
+        font-size: 20px;
       }
     }
   }

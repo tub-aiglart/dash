@@ -2,7 +2,7 @@
   <div class="index">
     <div class="intro">
       <h1 class="title">
-        Dashboard in construction ...
+        Dashboard under construction ...
       </h1>
       <p class="description">
         Some preview-functions are already working!
@@ -31,9 +31,10 @@ export default {
     width: 100%;
 
     .title {
-      font-size: 50px;
+      font-size: 40px;
       font-weight: 700;
       margin-bottom: 10px;
+      font-family: var(--font-mono);
     }
 
     .description {
