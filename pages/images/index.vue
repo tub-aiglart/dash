@@ -1,6 +1,10 @@
 <template>
   <div class="images">
-    <div class="intro" />
+    <div class="intro">
+      <nuxt-link class="button" to="/images/upload">
+        Upload
+      </nuxt-link>
+    </div>
     <div class="wrapper">
       <div v-for="image in images" :key="image.id" class="image">
         <div class="thumbnail">
@@ -41,6 +45,26 @@ export default {
 <style lang="scss" scoped>
 .images {
 
+  .intro {
+    display: flex;
+    flex-direction: column;
+    background: var(--black);
+    box-shadow: var(--shadow-all);
+    margin: 25px 25px 0 25px;
+    padding: 50px;
+
+    .button {
+      font-size: 25px;
+      width: 150px;
+      padding: 10px 5px;
+      background: var(--light);
+      color: var(--dark);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      text-align: center;
+    }
+  }
+
   .wrapper {
     display: flex;
     flex-direction: row;
@@ -77,6 +101,7 @@ export default {
           font-size: 25px;
           font-weight: 700;
           margin-bottom: 5px;
+          font-family: var(--font-mono);
         }
 
         .description {
@@ -95,9 +120,10 @@ export default {
           background: var(--light);
           color: var(--dark);
           padding: 10px 5px;
-          width: 50px;
+          width: 75px;
           text-align: center;
           margin-top: auto;
+          font-family: var(--font-mono);
 
           &:hover {
             background: var(--white);
