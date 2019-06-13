@@ -20,6 +20,7 @@
           <p class="type">
             type: {{ exhibition.type }}
           </p>
+          <div class="space" />
           <nuxt-link class="button" :to="'/exhibitions/' + exhibition.id">
             Edit
           </nuxt-link>
@@ -33,7 +34,7 @@
 export default {
   middleware: 'authenticated',
   async asyncData({ env, $axios }) {
-    const result = await $axios.$get(env.BASE_URL + '/exhibitions')
+    const result = await $axios.$get('https://api.tub-aiglart.com' + '/exhibitions')
     return {
       exhibitions: result.sort((a, b) => (a.year.includes('-') ? a.year.split('-')[0] : a.year) - (b.year.includes('-') ? b.year.split('-')[0] : b.year))
     }
@@ -111,13 +112,16 @@ export default {
           margin-bottom: 10px;
         }
 
+        .space {
+          flex-grow: 1;
+        }
+
         .button {
           background: var(--light);
           color: var(--dark);
           padding: 10px 5px;
           width: 75px;
           text-align: center;
-          margin-top: auto;
           font-family: var(--font-mono);
 
           &:hover {

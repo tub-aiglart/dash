@@ -79,7 +79,7 @@ export default {
       this.$axios.setHeader('Content-Type', 'application/json')
       this.$axios.setHeader('Authorization', 'Basic ' + btoa(`${username}:${password}`))
 
-      const result = await this.$axios.$get(process.env.BASE_URL + '/authorize', {
+      const result = await this.$axios.$get('https://api.tub-aiglart.com' + '/authorize', { // change back
         validateStatus: function (status) {
           return status < 500
         }
@@ -190,6 +190,18 @@ export default {
           cursor: not-allowed;
         }
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .login {
+    justify-content: flex-start;
+
+    .wrapper {
+      width: 100%;
+      height: auto;
+      padding: 100px 0;
     }
   }
 }

@@ -2,10 +2,10 @@
   <div class="index">
     <div class="intro">
       <h1 class="title">
-        Dashboard under construction ...
+        welcome, {{ user.username }}!
       </h1>
       <p class="description">
-        Some preview-functions are already working!
+        There are {{ images.length }} images and {{ exhibitions.length }} exhibitions registered.
       </p>
     </div>
   </div>
@@ -13,7 +13,21 @@
 
 <script>
 export default {
-  middleware: 'authenticated'
+  middleware: 'authenticated',
+  async asyncData({ store, env, $axios }) {
+    const user = await $axios.$get(`${env.BASE_URL}/users/@me`, {
+      headers: {
+        'authorization': 'Bearer ' + store.state.auth.token
+      }
+    })
+    const images = await $axios.$get(`${env.BASE_URL}/images`)
+    const exhibitions = await $axios.$get(`${env.BASE_URL}/exhibitions`)
+    return {
+      user,
+      images,
+      exhibitions
+    }
+  }
 }
 </script>
 
