@@ -34,7 +34,7 @@
 export default {
   middleware: 'authenticated',
   async asyncData({ env, $axios }) {
-    const result = await $axios.$get('https://api.tub-aiglart.com' + '/images')
+    const result = await $axios.$get('/images')
     return {
       images: result,
       path: 'https://cdn.tub-aiglart.com' + '/images/'

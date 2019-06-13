@@ -30,8 +30,11 @@ export default {
   ],
 
   env: {
-    CDN_PATH: process.env.CDN_PATH,
-    BASE_URL: 'https://api.tub-aiglart.com'
+    CDN_PATH: process.env.CDN_PATH
+  },
+
+  axios: {
+    baseURL: process.env.BASE_URL
   },
 
   build: {

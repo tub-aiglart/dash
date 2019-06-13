@@ -30,7 +30,7 @@
 export default {
   middleware: 'authenticated',
   async asyncData({ env, route, $axios }) {
-    const result = await $axios.$get('https://api.tub-aiglart.com' + '/exhibition/' + route.params.id)
+    const result = await $axios.$get('/exhibition/' + route.params.id)
     return {
       exhibition: result
     }
@@ -45,7 +45,6 @@ export default {
       const button = document.getElementById('save')
 
       const result = await this.$axios.$request({
-        baseURL: 'https://api.tub-aiglart.com',
         url: `/exhibition/${id}`,
         method: 'patch',
         headers: {
@@ -72,7 +71,6 @@ export default {
     async remove(id) {
       const button = document.getElementById('remove')
       const result = await this.$axios.$request({
-        baseURL: 'https://api.tub-aiglart.com',
         url: `/exhibition/${id}`,
         method: 'delete',
         headers: {

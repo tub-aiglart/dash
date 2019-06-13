@@ -31,7 +31,7 @@
 export default {
   middleware: 'authenticated',
   async asyncData({ env, route, $axios }) {
-    const result = await $axios.$get('https://api.tub-aiglart.com' + '/image/' + route.params.id)
+    const result = await $axios.$get('/image/' + route.params.id)
     return {
       image: result,
       path: 'https://cdn.tub-aiglart.com' + '/images/'
@@ -46,7 +46,6 @@ export default {
       const button = document.getElementById('button')
 
       const result = await this.$axios.$request({
-        baseURL: 'https://api.tub-aiglart.com',
         url: `/image/${id}`,
         method: 'patch',
         headers: {
@@ -73,7 +72,6 @@ export default {
     async remove(id) {
       const button = document.getElementById('remove')
       const result = await this.$axios.$request({
-        baseURL: 'https://api.tub-aiglart.com',
         url: `/image/${id}`,
         method: 'delete',
         headers: {

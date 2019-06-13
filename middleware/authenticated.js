@@ -1,7 +1,6 @@
 export default async function ({ store, redirect, app, env }) {
   if (store.state.auth.token) {
     const result = await app.$axios.$request({
-      baseURL: 'https://api.tub-aiglart.com',
       url: '/validate',
       method: 'get',
       headers: {
@@ -16,7 +15,6 @@ export default async function ({ store, redirect, app, env }) {
       store.commit('auth/set', '')
       if (app.$storage.getCookie('token')) {
         const result = await app.$axios.$request({
-          baseURL: 'https://api.tub-aiglart.com',
           url: '/refresh',
           method: 'get',
           headers: {
@@ -40,7 +38,6 @@ export default async function ({ store, redirect, app, env }) {
     }
   } else if (app.$storage.getCookie('token')) {
     const result = await app.$axios.$request({
-      baseURL: 'https://api.tub-aiglart.com',
       url: '/refresh',
       method: 'get',
       headers: {

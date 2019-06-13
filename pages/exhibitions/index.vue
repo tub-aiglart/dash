@@ -34,7 +34,7 @@
 export default {
   middleware: 'authenticated',
   async asyncData({ env, $axios }) {
-    const result = await $axios.$get('https://api.tub-aiglart.com' + '/exhibitions')
+    const result = await $axios.$get('/exhibitions')
     return {
       exhibitions: result.sort((a, b) => (a.year.includes('-') ? a.year.split('-')[0] : a.year) - (b.year.includes('-') ? b.year.split('-')[0] : b.year))
     }
