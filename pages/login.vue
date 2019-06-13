@@ -193,4 +193,16 @@ export default {
     }
   }
 }
+
+@media only screen and (max-width: 800px) {
+  .login {
+    justify-content: flex-start;
+
+    .wrapper {
+      width: 100%;
+      height: auto;
+      padding: 100px 0;
+    }
+  }
+}
 </style>

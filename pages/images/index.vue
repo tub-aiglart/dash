@@ -20,6 +20,7 @@
           <p class="size">
             {{ image.size }}
           </p>
+          <div class="space" />
           <nuxt-link :to="'/images/' + image.id" class="button">
             Edit
           </nuxt-link>
@@ -116,13 +117,16 @@ export default {
           margin-bottom: 10px;
         }
 
+        .space {
+          flex-grow: 1;
+        }
+
         .button {
           background: var(--light);
           color: var(--dark);
           padding: 10px 5px;
           width: 75px;
           text-align: center;
-          margin-top: auto;
           font-family: var(--font-mono);
 
           &:hover {

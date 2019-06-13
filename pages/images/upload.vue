@@ -88,6 +88,7 @@ export default {
         font-weight: 700;
         outline: none;
         font-family: var(--font-mono);
+        width: 100%;
       }
 
       .title {

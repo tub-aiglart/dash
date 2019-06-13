@@ -20,6 +20,7 @@
           <p class="type">
             type: {{ exhibition.type }}
           </p>
+          <div class="space" />
           <nuxt-link class="button" :to="'/exhibitions/' + exhibition.id">
             Edit
           </nuxt-link>
@@ -111,13 +112,16 @@ export default {
           margin-bottom: 10px;
         }
 
+        .space {
+          flex-grow: 1;
+        }
+
         .button {
           background: var(--light);
           color: var(--dark);
           padding: 10px 5px;
           width: 75px;
           text-align: center;
-          margin-top: auto;
           font-family: var(--font-mono);
 
           &:hover {
