@@ -20,7 +20,6 @@
           <p class="type">
             type: {{ exhibition.type }}
           </p>
-          <div class="space" />
           <nuxt-link class="button" :to="'/exhibitions/' + exhibition.id">
             Edit
           </nuxt-link>
@@ -110,10 +109,6 @@ export default {
         .type {
           font-size: 15px;
           margin-bottom: 10px;
-        }
-
-        .space {
-          flex-grow: 1;
         }
 
         .button {

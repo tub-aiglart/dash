@@ -20,7 +20,6 @@
           <p class="size">
             {{ image.size }}
           </p>
-          <div class="space" />
           <nuxt-link :to="'/images/' + image.id" class="button">
             Edit
           </nuxt-link>
@@ -115,10 +114,6 @@ export default {
           font-size: 15px;
           opacity: .75;
           margin-bottom: 10px;
-        }
-
-        .space {
-          flex-grow: 1;
         }
 
         .button {
