@@ -10,6 +10,9 @@
       <nuxt-link class="link" to="/exhibitions">
         Exhibitions
       </nuxt-link>
+      <nuxt-link class="link" to="/news">
+        News
+      </nuxt-link>
     </div>
   </div>
 </template>
