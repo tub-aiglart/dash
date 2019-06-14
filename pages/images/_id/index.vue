@@ -30,11 +30,11 @@
 <script>
 export default {
   middleware: 'authenticated',
-  async asyncData({ env, route, $axios }) {
-    const result = await $axios.$get('/image/' + route.params.id)
+  async asyncData({ route, app }) {
+    const result = await app.$axios.$get(`${app.$env.BASE_URL}/image/${route.params.id}`)
     return {
       image: result,
-      path: 'https://cdn.tub-aiglart.com' + '/images/'
+      path: `${app.$env.CDN_PATH}/images/`
     }
   },
   methods: {
@@ -46,10 +46,11 @@ export default {
       const button = document.getElementById('button')
 
       const result = await this.$axios.$request({
+        baseURL: this.$env.BASE_URL,
         url: `/image/${id}`,
         method: 'patch',
         headers: {
-          'Authorization': 'Bearer ' + this.$store.state.auth.token
+          'Authorization': `Bearer ${this.$store.state.auth.token}`
         },
         data: {
           'title': title,
@@ -71,11 +72,13 @@ export default {
     },
     async remove(id) {
       const button = document.getElementById('remove')
+
       const result = await this.$axios.$request({
+        baseURL: this.$env.BASE_URL,
         url: `/image/${id}`,
         method: 'delete',
         headers: {
-          'Authorization': 'Bearer ' + this.$store.state.auth.token
+          'Authorization': `Bearer ${this.$store.state.auth.token}`
         },
         validateStatus: function (status) {
           return status < 500

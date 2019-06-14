@@ -33,11 +33,11 @@
 <script>
 export default {
   middleware: 'authenticated',
-  async asyncData({ env, $axios }) {
-    const result = await $axios.$get('/images')
+  async asyncData({ app }) {
+    const result = await app.$axios.$get(`${app.$env.BASE_URL}/images`)
     return {
       images: result,
-      path: 'https://cdn.tub-aiglart.com' + '/images/'
+      path: `${app.$env.CDN_PATH}/images/`
     }
   }
 }

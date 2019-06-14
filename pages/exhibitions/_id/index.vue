@@ -29,8 +29,8 @@
 <script>
 export default {
   middleware: 'authenticated',
-  async asyncData({ env, route, $axios }) {
-    const result = await $axios.$get('/exhibition/' + route.params.id)
+  async asyncData({ route, app }) {
+    const result = await app.$axios.$get(`${app.$env.BASE_URL}/exhibition/${route.params.id}`)
     return {
       exhibition: result
     }
@@ -45,10 +45,11 @@ export default {
       const button = document.getElementById('save')
 
       const result = await this.$axios.$request({
+        baseURL: this.$env.BASE_URL,
         url: `/exhibition/${id}`,
         method: 'patch',
         headers: {
-          'Authorization': 'Bearer ' + this.$store.state.auth.token
+          'Authorization': `Bearer ${this.$store.state.auth.token}`
         },
         data: {
           'name': name,
@@ -70,11 +71,13 @@ export default {
     },
     async remove(id) {
       const button = document.getElementById('remove')
+
       const result = await this.$axios.$request({
+        baseURL: this.$env.BASE_URL,
         url: `/exhibition/${id}`,
         method: 'delete',
         headers: {
-          'Authorization': 'Bearer ' + this.$store.state.auth.token
+          'Authorization': `Bearer ${this.$store.state.auth.token}`
         },
         validateStatus: function (status) {
           return status < 500

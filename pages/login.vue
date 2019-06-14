@@ -77,9 +77,9 @@ export default {
       const button = document.getElementById('button')
 
       this.$axios.setHeader('Content-Type', 'application/json')
-      this.$axios.setHeader('Authorization', 'Basic ' + btoa(`${username}:${password}`))
+      this.$axios.setHeader('Authorization', `Basic ${btoa(`${username}:${password}`)}`)
 
-      const result = await this.$axios.$get('/authorize', {
+      const result = await this.$axios.$get(`${this.$env.BASE_URL}/authorize`, {
         validateStatus: function (status) {
           return status < 500
         }

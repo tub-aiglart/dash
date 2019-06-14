@@ -34,10 +34,11 @@ export default {
       const button = document.getElementById('save')
 
       const result = await this.$axios.$request({
-        url: `/exhibition`,
+        baseURL: this.$env.BASE_URL,
+        url: '/exhibition',
         method: 'post',
         headers: {
-          'Authorization': 'Bearer ' + this.$store.state.auth.token
+          'Authorization': `Bearer ${this.$store.state.auth.token}`
         },
         data: {
           name: name,

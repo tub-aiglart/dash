@@ -14,19 +14,20 @@
 <script>
 export default {
   middleware: 'authenticated',
-  async asyncData({ store, env, app }) {
+  async asyncData({ store, app }) {
     const user = await app.$axios.$request({
+      baseURL: app.$env.BASE_URL,
       url: '/users/@me',
       method: 'get',
       headers: {
-        'Authorization': 'Bearer ' + store.state.auth.token
+        'Authorization': `Bearer ${store.state.auth.token}`
       },
       validateStatus: function (status) {
         return status < 500
       }
     })
-    const images = await app.$axios.$get(`/images`)
-    const exhibitions = await app.$axios.$get(`/exhibitions`)
+    const images = await app.$axios.$get(`${app.$env.BASE_URL}/images`)
+    const exhibitions = await app.$axios.$get(`${app.$env.BASE_URL}/exhibitions`)
     return {
       user,
       images,

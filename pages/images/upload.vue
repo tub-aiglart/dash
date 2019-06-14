@@ -40,10 +40,11 @@ export default {
       formData.append('displayed', displayed)
 
       const result = await this.$axios.$request({
-        url: `/image`,
+        baseURL: this.$env.BASE_URL,
+        url: '/image',
         method: 'post',
         headers: {
-          'Authorization': 'Bearer ' + this.$store.state.auth.token,
+          'Authorization': `Bearer ${this.$store.state.auth.token}`,
           'Content-Type': 'multipart/form-data'
         },
         data: formData,

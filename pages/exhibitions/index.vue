@@ -2,7 +2,7 @@
   <div class="exhibitions">
     <div class="intro">
       <nuxt-link class="button" to="/exhibitions/upload">
-        Upload
+        Add
       </nuxt-link>
     </div>
     <div class="wrapper">
@@ -33,8 +33,8 @@
 <script>
 export default {
   middleware: 'authenticated',
-  async asyncData({ env, $axios }) {
-    const result = await $axios.$get('/exhibitions')
+  async asyncData({ app }) {
+    const result = await app.$axios.$get(`${app.$env.BASE_URL}/exhibitions`)
     return {
       exhibitions: result.sort((a, b) => (a.year.includes('-') ? a.year.split('-')[0] : a.year) - (b.year.includes('-') ? b.year.split('-')[0] : b.year))
     }
