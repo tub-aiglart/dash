@@ -26,13 +26,14 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    'nuxt-universal-storage'
+    'nuxt-universal-storage',
+    ['nuxt-env', {
+      keys: [
+        'CDN_PATH',
+        'BASE_URL'
+      ]
+    }]
   ],
-
-  env: {
-    CDN_PATH: process.env.CDN_PATH,
-    BASE_URL: 'https://api.tub-aiglart.com'
-  },
 
   build: {
     extend(config, ctx) {

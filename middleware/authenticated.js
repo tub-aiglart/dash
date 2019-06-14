@@ -1,11 +1,11 @@
-export default async function ({ store, redirect, app, env }) {
+export default async function ({ store, redirect, app }) {
   if (store.state.auth.token) {
     const result = await app.$axios.$request({
-      baseURL: 'https://api.tub-aiglart.com',
+      baseURL: app.$env.BASE_URL,
       url: '/validate',
       method: 'get',
       headers: {
-        'Authorization': 'Bearer ' + store.state.auth.token
+        'Authorization': `Bearer ${store.state.auth.token}`
       },
       validateStatus: function (status) {
         return status < 500
@@ -16,11 +16,11 @@ export default async function ({ store, redirect, app, env }) {
       store.commit('auth/set', '')
       if (app.$storage.getCookie('token')) {
         const result = await app.$axios.$request({
-          baseURL: 'https://api.tub-aiglart.com',
+          baseURL: app.$env.BASE_URL,
           url: '/refresh',
           method: 'get',
           headers: {
-            'Authorization': 'Bearer ' + app.$storage.getCookie('token')
+            'Authorization': `Bearer ${app.$storage.getCookie('token')}`
           },
           validateStatus: function (status) {
             return status < 500
@@ -40,11 +40,11 @@ export default async function ({ store, redirect, app, env }) {
     }
   } else if (app.$storage.getCookie('token')) {
     const result = await app.$axios.$request({
-      baseURL: 'https://api.tub-aiglart.com',
+      baseURL: app.$env.BASE_URL,
       url: '/refresh',
       method: 'get',
       headers: {
-        'Authorization': 'Bearer ' + app.$storage.getCookie('token')
+        'Authorization': `Bearer ${app.$storage.getCookie('token')}`
       },
       validateStatus: function (status) {
         return status < 500

@@ -2,7 +2,7 @@
   <div class="exhibitions">
     <div class="intro">
       <nuxt-link class="button" to="/exhibitions/upload">
-        Upload
+        Add
       </nuxt-link>
     </div>
     <div class="wrapper">
@@ -20,7 +20,6 @@
           <p class="type">
             type: {{ exhibition.type }}
           </p>
-          <div class="space" />
           <nuxt-link class="button" :to="'/exhibitions/' + exhibition.id">
             Edit
           </nuxt-link>
@@ -33,8 +32,8 @@
 <script>
 export default {
   middleware: 'authenticated',
-  async asyncData({ env, $axios }) {
-    const result = await $axios.$get('https://api.tub-aiglart.com' + '/exhibitions')
+  async asyncData({ app }) {
+    const result = await app.$axios.$get(`${app.$env.BASE_URL}/exhibitions`)
     return {
       exhibitions: result.sort((a, b) => (a.year.includes('-') ? a.year.split('-')[0] : a.year) - (b.year.includes('-') ? b.year.split('-')[0] : b.year))
     }
@@ -110,10 +109,6 @@ export default {
         .type {
           font-size: 15px;
           margin-bottom: 10px;
-        }
-
-        .space {
-          flex-grow: 1;
         }
 
         .button {

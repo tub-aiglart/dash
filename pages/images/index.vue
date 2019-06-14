@@ -20,7 +20,6 @@
           <p class="size">
             {{ image.size }}
           </p>
-          <div class="space" />
           <nuxt-link :to="'/images/' + image.id" class="button">
             Edit
           </nuxt-link>
@@ -33,11 +32,11 @@
 <script>
 export default {
   middleware: 'authenticated',
-  async asyncData({ env, $axios }) {
-    const result = await $axios.$get('https://api.tub-aiglart.com' + '/images')
+  async asyncData({ app }) {
+    const result = await app.$axios.$get(`${app.$env.BASE_URL}/images`)
     return {
       images: result,
-      path: 'https://cdn.tub-aiglart.com' + '/images/'
+      path: `${app.$env.CDN_PATH}/images/`
     }
   }
 }
@@ -115,10 +114,6 @@ export default {
           font-size: 15px;
           opacity: .75;
           margin-bottom: 10px;
-        }
-
-        .space {
-          flex-grow: 1;
         }
 
         .button {

@@ -1,20 +1,17 @@
 <template>
-  <div class="upload">
+  <div class="news">
     <div class="wrapper">
       <div class="content">
-        <input id="name" class="name" type="text" placeholder="name">
-        <input id="year" class="year" type="text" placeholder="year">
-        <input id="location" class="location" type="text" placeholder="location">
-        <select id="type" class="type" required>
-          <option value="solo">
-            solo
-          </option>
-          <option value="group">
-            group
-          </option>
-        </select>
-        <button id="save" class="button" @click="upload()">
-          Upload
+        <input id="title" class="title" type="text" :value="news.title" placeholder="title">
+        <textarea id="description" v-model="description" class="description" rows="5" placeholder="description" />
+        <div class="displayed">
+          <input id="checkbox" class="checkbox" type="checkbox" :checked="news.displayed">
+          <p class="label">
+            Displayed
+          </p>
+        </div>
+        <button id="save" class="button" @click="update()">
+          Update
         </button>
       </div>
     </div>
@@ -24,27 +21,31 @@
 <script>
 export default {
   middleware: 'authenticated',
+  async asyncData({ route, app }) {
+    const result = await app.$axios.$get(`${app.$env.BASE_URL}/news`)
+    return {
+      news: result,
+      description: result.description
+    }
+  },
   methods: {
-    async upload() {
-      const name = document.getElementById('name').value
-      const year = document.getElementById('year').value
-      const location = document.getElementById('location').value
-      const select = document.getElementById('type')
-      const type = select.options[select.selectedIndex].text
-      const button = document.getElementById('save')
+    async update(id) {
+      const title = document.getElementById('title').value
+      const description = document.getElementById('description').value
+      const displayed = document.getElementById('checkbox').checked
+      const button = document.getElementById('button')
 
       const result = await this.$axios.$request({
         baseURL: this.$env.BASE_URL,
-        url: '/exhibition',
-        method: 'post',
+        url: `/news`,
+        method: 'patch',
         headers: {
           'Authorization': `Bearer ${this.$store.state.auth.token}`
         },
         data: {
-          name: name,
-          location: location,
-          year: year,
-          type: type
+          'title': title,
+          'description': description,
+          'displayed': displayed
         },
         validateStatus: function (status) {
           return status < 500
@@ -52,9 +53,10 @@ export default {
       })
 
       if (result.message === 'success') {
-        this.$router.push('/exhibitions')
+        this.$router.push('/')
       } else {
-        button.text = 'Error'
+        button.disabled = false
+        button.innerText = 'Error'
       }
     }
   }
@@ -62,24 +64,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.upload {
-  display: flex;
-  padding: 25px;
+.news {
 
   .wrapper {
     display: flex;
+    flex-direction: column;
     background: var(--black);
     box-shadow: var(--shadow-all);
-    padding: 25px;
-    width: 100%;
+    margin: 25px;
 
     .content {
       display: flex;
       flex-direction: column;
-      padding: 25px;
-      width: 100%;
+      padding: 50px;
 
-      .name {
+      .title {
         font-size: 25px;
         border: none;
         padding: 5px;
@@ -91,7 +90,7 @@ export default {
         font-family: var(--font-mono);
       }
 
-      .year {
+      .description {
         font-size: 25px;
         border: none;
         padding: 5px;
@@ -103,28 +102,16 @@ export default {
         font-family: var(--font-mono);
       }
 
-      .location {
-        font-size: 25px;
-        border: none;
-        padding: 5px;
-        background: var(--white);
-        color: var(--dark);
-        font-weight: 700;
-        outline: none;
+      .displayed {
         margin-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         font-family: var(--font-mono);
-      }
 
-      .type {
-        font-size: 25px;
-        border: none;
-        padding: 5px;
-        background: var(--white);
-        color: var(--dark);
-        font-weight: 700;
-        outline: none;
-        margin-bottom: 10px;
-        font-family: var(--font-mono);
+        .label {
+          margin-left: 10px;
+        }
       }
 
       .button {
@@ -152,30 +139,30 @@ export default {
 }
 
 @media only screen and (max-width: 800px) {
-  .upload {
+  .image {
 
     .wrapper {
 
       .content {
 
-        .name {
+        .title {
           font-size: 15px;
         }
 
-        .year {
+        .description {
           font-size: 15px;
         }
 
-        .location {
-          font-size: 15px;
-        }
+        .displayed {
 
-        .type {
-          font-size: 15px;
+          .label {
+            font-size: 15px;
+          }
         }
 
         .button {
           font-size: 15px;
+          margin: 0 0 10px 0;
         }
       }
     }
