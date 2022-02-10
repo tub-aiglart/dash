@@ -21,7 +21,7 @@
     "@tub/css": "github:tub-aiglart/css",
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "nuxt": "^2.8.1",
     "nuxt-env": "^0.1.0",
     "nuxt-universal-storage": "^0.2.0",
