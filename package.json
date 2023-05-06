@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.5.4",
-    "@nuxtjs/pwa": "^2.6.0",
+    "@nuxtjs/pwa": "^3.3.5",
     "@tub/css": "github:tub-aiglart/css",
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
